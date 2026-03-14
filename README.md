@@ -1,30 +1,54 @@
-# Kernel-PCA
-We used Kernel PCA in this non linear dataset using both Python and R
+# Kernel PCA — Non-Linear Dimensionality Reduction
 
+Applies **Kernel PCA** (RBF kernel) to reduce a 2-D social-network ads dataset, then classifies purchase intent with **Logistic Regression**. Implementations in both Python and R.
 
-# Principle-Component-Analysis
-In this project I used Principal Component Analysis in the Variables and used the other machine learning models for execution in both Python and R
+## What It Does
 
-# Dimensionality Reduction :
+1. Loads the *Social Network Ads* dataset (age, estimated salary → purchased).
+2. Scales features with `StandardScaler` (Python) / `scale()` (R).
+3. Projects data into a 2-component kernel PCA space using an RBF kernel.
+4. Trains a logistic regression classifier on the transformed features.
+5. Visualises the non-linear decision boundary for training and test sets.
 
-## Feature selection :
-1) Backward Elimination
-2) Forward Propagation
-3) BiDirectional Elemination
-4) Score Comparison
+## Dataset
 
-## Feature Extraction :
-1) PCA
-2) LDA
-3) Kernel PCA
-4) QDA
+| File | Rows | Features | Target |
+|---|---|---|---|
+| `Social_Network_Ads.csv` | 400 | Age, Estimated Salary | Purchased (0/1) |
 
-# PCA :
-## <i> From the m independent variables of your default dataset , PCA extracts p<=m new independent variables that explain the most , the variance of dataset , regardless of the dependant variable
-</i>
+## 🛠 Tech Stack
 
-## \# Since PCA considers dependent variable , it makes PCA unsupervised .
+| | Tool | Purpose |
+|---|---|---|
+| 🐍 | Python 3 | Main implementation |
+| 📊 | scikit-learn | KernelPCA, LogisticRegression, StandardScaler |
+| 📈 | matplotlib | Decision-boundary visualisation |
+| 🔢 | NumPy / pandas | Data handling |
+| 📐 | R | Alternative implementation |
+| 📦 | kernlab (R) | Kernel PCA via `kpca()` |
+| 📦 | caTools (R) | Train/test split |
 
-[Link of the dataset](archive.ics.uci.edu/m/datasets/wine)
+## Getting Started
 
-# We should use Kernels in non linear dataset
+### Python
+
+```bash
+pip install numpy pandas matplotlib scikit-learn
+python kernel_pca.py
+```
+
+### R
+
+```r
+# install.packages(c("caTools", "kernlab"))
+source("kernel_pca.R")
+```
+
+## ⚠️ Known Issues
+
+- The R version previously depended on `ElemStatLearn`, which has been removed from CRAN. That dependency has been dropped — all plotting uses base R.
+- Axis labels now correctly read "PC 1" / "PC 2" instead of the raw feature names, since Kernel PCA transforms the original feature space.
+
+## License
+
+See [LICENSE](LICENSE).
